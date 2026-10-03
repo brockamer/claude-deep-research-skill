@@ -32,3 +32,4 @@ htmlcov/
 
 # Cloned external skills/repos (kept local)
 andrej-karpathy-skills/
+.venv/
