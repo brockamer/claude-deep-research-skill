@@ -117,7 +117,8 @@ class SourceEvaluator:
         parsed = urlparse(url)
         domain = parsed.netloc.lower()
         # Remove www prefix
-        domain = domain.replace('www.', '')
+        if domain.startswith('www.'):
+            domain = domain[4:]
         return domain
 
     def _evaluate_domain_authority(self, domain: str) -> float:
@@ -181,7 +182,7 @@ class SourceEvaluator:
 
         # Author credentials (if available)
         if author:
-            if any(title in author.lower() for title in ['dr.', 'phd', 'professor']):
+            if any(cred in author.lower() for cred in ['dr.', 'phd', 'professor']):
                 score += 15
 
         return min(score, 100.0)
